@@ -28,6 +28,13 @@ import {
   newScheduleController,
   updateScheduleController,
 } from "./controllers/schedule";
+import {
+  allSalonsController,
+  deleteSalonController,
+  getSalonController,
+  newSalonController,
+  updateSalonController,
+} from "./controllers/salon";
 // import aut from "./handlers/auth-middleware";
 // import captcha from "./handlers/google-captcha-middleware";
 // import apiValidation from "./helpers/api_validation";
@@ -62,5 +69,11 @@ router.patch("/schedule", updateScheduleController);
 router.delete("/schedule", deleteScheduleController);
 router.get("/schedule/:id", getScheduleController);
 router.get("/schedules/query", allSchedulesController);
+
+router.post("/salon", newSalonController);
+router.patch("/salon", updateSalonController);
+router.delete("/salon", deleteSalonController);
+router.get("/salon/:id", getSalonController);
+router.get("/salons/query", allSalonsController);
 
 export default router;

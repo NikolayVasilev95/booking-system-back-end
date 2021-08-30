@@ -4,7 +4,11 @@ import Positions from "./positions";
 
 export default class Employees extends Model {
   public id!: number;
-  public name!: string;
+  public firstName!: string;
+  public middleName!: string;
+  public lastName!: string;
+  public img!: string;
+  public description!: string;
 }
 
 Employees.init(
@@ -14,7 +18,23 @@ Employees.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    firstName: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    middleName: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    lastName: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    img: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    description: {
       type: new DataTypes.STRING(128),
       allowNull: false,
     },

@@ -21,6 +21,14 @@ Positions.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
     },
+    salonId: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true,
+      references: {
+        model: "salons",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "positions",

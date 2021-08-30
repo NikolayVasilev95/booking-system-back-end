@@ -1,6 +1,10 @@
 export interface Employees {
   id?: number;
-  name: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  img: string;
+  description: string;
   positionId: string;
   scheduleId: string;
 }
