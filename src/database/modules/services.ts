@@ -6,8 +6,6 @@ export default class Services extends Model {
   public name!: string;
   public description!: string;
   public price!: string;
-  public employeeId!: string;
-  public serviceId!: string;
 }
 
 Services.init(

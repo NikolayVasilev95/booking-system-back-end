@@ -1,19 +1,18 @@
-import Employees from "../../modules/employees";
-import Position from "../../modules/positions";
-import Services from "../../modules/services";
-import { Positions } from "./types";
+import Calendar from "../../modules/calendars";
+import Schedules from "../../modules/schedules";
+import { Calendars } from "./types";
 
-const newPosition = async (request: Positions) => {
+const newCalendar = async (request: Calendars) => {
   try {
-    const transaction = await Position.sequelize?.transaction();
-    const position = await Position.create(request, {
+    const transaction = await Calendar.sequelize?.transaction();
+    const position = await Calendar.create(request, {
       transaction,
     });
     await transaction?.commit();
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };
     } else {
-      throw { message: "Failed to insert position." };
+      throw { message: "Failed to insert calendar." };
     }
   } catch (error) {
     console.log(error);
@@ -22,39 +21,39 @@ const newPosition = async (request: Positions) => {
   }
 };
 
-const updatePosition = async (request: Positions) => {
+const updateCalendar = async (request: Calendars) => {
   try {
-    const [resultNum] = await Position.update(
+    const [resultNum] = await Calendar.update(
       { ...request },
       { where: { id: request.id } }
     );
     if (resultNum === 1) {
-      return { result: await Position.findByPk(request.id), status: "success" };
+      return { result: await Calendar.findByPk(request.id), status: "success" };
     } else {
-      throw { message: "Failed to update position." };
+      throw { message: "Failed to update calendar." };
     }
   } catch (error) {
     return { result: error.message, status: "error" };
   }
 };
 
-const deletePosition = async (id: string) => {
+const deleteCalendar = async (id: string) => {
   try {
-    const resultNum = await Position.destroy({ where: { id: id } });
+    const resultNum = await Calendar.destroy({ where: { id: id } });
     if (resultNum === 1) {
       return {
-        result: "Position was deleted successfully!",
+        result: "Calendar was deleted successfully!",
         status: "success",
       };
     } else {
-      throw { message: "Failed to delete position." };
+      throw { message: "Failed to delete calendar." };
     }
   } catch (error) {
     return { result: error.message, status: "error" };
   }
 };
 
-// const recoverUser = async (id: string) => {
+// const recoverCalendar = async (id: string) => {
 //   try {
 //     const query = await User.findOneAndUpdate(
 //       { _id: id },
@@ -71,30 +70,29 @@ const deletePosition = async (id: string) => {
 //   }
 // };
 
-const getPosition = async (id: string) => {
+const getCalendar = async (id: string) => {
   try {
-    const position = await Position.findByPk(id);
+    const position = await Calendar.findByPk(id);
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };
     } else {
-      throw { message: "Position not found." };
+      throw { message: "Calendar not found." };
     }
   } catch (error) {
     return { result: error.message, status: "error" };
   }
 };
 
-const allPositions = async (query: any) => {
+const allCalendars = async (query: any) => {
   try {
     console.log(query, "tyk!!");
 
-    const position = await Position.findAll(
+    const position = await Calendar.findAll(
       Object.keys(query).length === 0
         ? {}
         : {
             include: [
-              { model: Employees, required: true },
-              { model: Services, required: true },
+              { model: Schedules, required: true },
             ],
             where: { ...query },
           }
@@ -111,7 +109,7 @@ const allPositions = async (query: any) => {
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };
     } else {
-      throw { message: "no position found." };
+      throw { message: "no calendar found." };
     }
   } catch (error) {
     console.log(error);
@@ -121,10 +119,10 @@ const allPositions = async (query: any) => {
 };
 
 export {
-  newPosition,
-  updatePosition,
-  deletePosition,
-  //   recoverPosition,
-  getPosition,
-  allPositions,
+  newCalendar,
+  updateCalendar,
+  deleteCalendar,
+  //   recoverCalendar,
+  getCalendar,
+  allCalendars,
 };

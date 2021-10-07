@@ -41,7 +41,7 @@ Positions.hasMany(Employees, {
   foreignKey: "positionId",
   foreignKeyConstraint: true,
 });
-Positions.hasOne(Services, {
+Positions.hasMany(Services, {
   foreignKey: "positionId",
   foreignKeyConstraint: true,
 });

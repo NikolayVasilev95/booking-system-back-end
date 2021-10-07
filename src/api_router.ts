@@ -35,6 +35,7 @@ import {
   newSalonController,
   updateSalonController,
 } from "./controllers/salon";
+import { allCalendarsController, deleteCalendarController, getCalendarController, newCalendarController, updateCalendarController } from "./controllers/calendar";
 // import aut from "./handlers/auth-middleware";
 // import captcha from "./handlers/google-captcha-middleware";
 // import apiValidation from "./helpers/api_validation";
@@ -75,5 +76,11 @@ router.patch("/salon", updateSalonController);
 router.delete("/salon", deleteSalonController);
 router.get("/salon/:id", getSalonController);
 router.get("/salons/query", allSalonsController);
+
+router.post("/calendar", newCalendarController);
+router.patch("/calendar", updateCalendarController);
+router.delete("/calendar", deleteCalendarController);
+router.get("/calendar/:id", getCalendarController);
+router.get("/calendars/query", allCalendarsController);
 
 export default router;

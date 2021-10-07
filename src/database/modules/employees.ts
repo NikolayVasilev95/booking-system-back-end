@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db_config";
-import Positions from "./positions";
+import Calendars from "./calendars";
 
 export default class Employees extends Model {
   public id!: number;
@@ -46,14 +46,6 @@ Employees.init(
         key: "id",
       },
     },
-    scheduleId: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
-      references: {
-        model: "schedules",
-        key: "id",
-      },
-    },
   },
   {
     tableName: "employees",
@@ -61,3 +53,9 @@ Employees.init(
     sequelize,
   }
 );
+
+
+Employees.hasOne(Calendars, {
+  foreignKey: "employeeId",
+  foreignKeyConstraint: true,
+});

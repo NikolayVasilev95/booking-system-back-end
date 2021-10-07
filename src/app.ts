@@ -5,6 +5,8 @@ import { Client } from "pg";
 import apiRouter from "./api_router";
 
 import sequelize from "./config/db_config";
+import { createDB } from "./create_data";
+// createDB();
 // sequelize.sync({ force: true });
 // const pgClient = new Client({
 //     user: "kqcnjtmjdugxlk",
