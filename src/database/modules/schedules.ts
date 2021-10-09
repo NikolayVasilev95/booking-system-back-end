@@ -4,10 +4,14 @@ import Employees from "./employees";
 
 export default class Schedules extends Model {
   public id!: number;
-  public name!: string;
   public start!: string;
   public end!: string;
   public status!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public email!: string;
+  public picture!: string;
+  public phone!: string;
 }
 
 Schedules.init(
@@ -17,20 +21,36 @@ Schedules.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: new DataTypes.STRING(128),
-      allowNull: false,
-    },
     start: {
-      type: new DataTypes.DATE,
+      type: new DataTypes.DATE(),
       allowNull: false,
     },
     end: {
-      type: new DataTypes.DATE,
+      type: new DataTypes.DATE(),
       allowNull: false,
     },
     status: {
       // type: new DataTypes.ENUM("reserve", "pending"),
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    firstName: {
+      type: new DataTypes.STRING(128),
+      allowNull: true,
+    },
+    lastName: {
+      type: new DataTypes.STRING(128),
+      allowNull: true,
+    },
+    email: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    picture: {
+      type: new DataTypes.STRING(128),
+      allowNull: true,
+    },
+    phone: {
       type: new DataTypes.STRING(128),
       allowNull: false,
     },

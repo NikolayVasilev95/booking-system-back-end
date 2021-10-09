@@ -1,4 +1,12 @@
 export interface Schedules {
   id?: number;
-  name: string;
+  start: string;
+  end: string;
+  status: string;
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  picture?: string;
+  calendarId: number;
+  phone: string;
 }
