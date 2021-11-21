@@ -107,7 +107,7 @@ const allPositions = async (query: any) => {
     //   where: { ...query },
     // });
     console.log(position);
-    
+
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };
     } else {

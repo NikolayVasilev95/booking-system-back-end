@@ -84,17 +84,17 @@ const getEmployee = async (id: string) => {
 const allEmployees = async (query: any) => {
   try {
     const employee = await Employee.findAll({
-      include: [
-        {
-          association: "positions",
-          include: [
-            {
-              model: Positions,
-              required: true,
-            },
-          ],
-        },
-      ],
+      // include: [
+      //   {
+      //     association: "positions",
+      //     include: [
+      //       {
+      //         model: Positions,
+      //         required: true,
+      //       },
+      //     ],
+      //   },
+      // ],
       where: { ...query },
     });
     // const employee = await Employee.findAll({ where: { ...query } });

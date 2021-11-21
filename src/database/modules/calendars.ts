@@ -6,8 +6,6 @@ import Schedules from "./schedules";
 export default class Calendars extends Model {
   public id!: number;
   public name!: string;
-  public employeeId!: string;
-  public scheduleId!: string;
 }
 
 Calendars.init(
@@ -22,13 +20,13 @@ Calendars.init(
       allowNull: false,
     },
     employeeId: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: true,
-        references: {
-          model: "employees",
-          key: "id",
-        },
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true,
+      references: {
+        model: "employees",
+        key: "id",
       },
+    },
   },
   {
     tableName: "calendars",

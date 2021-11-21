@@ -6,7 +6,6 @@ export default class Salons extends Model {
   public id!: number;
   public name!: string;
   public address!: string;
-  public salonId!: string;
 }
 
 Salons.init(

@@ -95,13 +95,7 @@ const allSalons = async (query: any) => {
             where: { ...query },
           }
     );
-    // const position = await Position.findAll({
-    //   include: [
-    //     { model: Employees, required: true },
-    //     { model: Services, required: true },
-    //   ],
-    //   where: { ...query },
-    // });
+
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };
     } else {

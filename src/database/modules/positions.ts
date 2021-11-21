@@ -6,8 +6,6 @@ import Services from "./services";
 export default class Positions extends Model {
   public id!: number;
   public name!: string;
-  public employeeId!: string;
-  public serviceId!: string;
 }
 
 Positions.init(
