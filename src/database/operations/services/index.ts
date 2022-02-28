@@ -1,3 +1,4 @@
+import Positions from "../../modules/positions";
 import Service from "../../modules/services";
 import { Services } from "./types";
 
@@ -81,7 +82,24 @@ const getService = async (id: string) => {
 
 const allServices = async (query: any) => {
   try {
-    const position = await Service.findAll();
+    const position = await Service.findAll(
+      Object.keys(query).length === 0
+        ? {}
+        : {
+            include: [
+              {
+                model: Positions,
+                as: "positions",
+                where: { id: query["positionId"] },
+                required: true,
+                attributes: [],
+              },
+            ],
+            attributes: {
+              exclude: ["positionId"],
+            },
+          }
+    );
     // const position = await Service.findAll({ where: { ...query } });
     if (position !== null && position !== undefined) {
       return { result: position, status: "success" };

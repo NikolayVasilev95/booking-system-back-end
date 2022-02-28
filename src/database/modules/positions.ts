@@ -11,21 +11,13 @@ export default class Positions extends Model {
 Positions.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
     name: {
       type: new DataTypes.STRING(128),
       allowNull: false,
-    },
-    salonId: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
-      references: {
-        model: "salons",
-        key: "id",
-      },
     },
   },
   {
@@ -36,10 +28,34 @@ Positions.init(
 );
 
 Positions.hasMany(Employees, {
+  sourceKey: "id",
   foreignKey: "positionId",
+  as: "employees",
   foreignKeyConstraint: true,
 });
-Positions.hasMany(Services, {
+Employees.belongsTo(Positions, {
   foreignKey: "positionId",
+  as: "positions",
+});
+
+// Positions.belongsToMany(Services, {
+//   through: "position_service",
+//   as: "services",
+//   foreignKey: "positionId",
+// });
+// Services.belongsToMany(Positions, {
+//   through: "position_service",
+//   as: "positions",
+//   foreignKey: "serviceId",
+// });
+
+Positions.hasMany(Services, {
+  sourceKey: "id",
+  foreignKey: "positionId",
+  as: "services",
   foreignKeyConstraint: true,
+});
+Services.belongsTo(Positions, {
+  foreignKey: "positionId",
+  as: "positions",
 });

@@ -20,7 +20,6 @@ const createDB = async () => {
   for (let index = 1; index <= 5; index++) {
     await Positions.create({
       name: randomString(),
-      salonId: 1,
     });
 
     await Employees.create({
@@ -30,6 +29,7 @@ const createDB = async () => {
       img: "http://hansel-and-gretel-nail-barber.com/img/4F34A2DF1-C821-4F00-B08A-F259BCEC2EF1.jpg",
       description: randomString(),
       positionId: index,
+      salonId: 1,
     });
 
     await Services.create({

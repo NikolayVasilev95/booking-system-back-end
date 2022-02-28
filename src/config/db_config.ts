@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-export default new Sequelize("postgres", "postgres", "pgpass", {
+export default new Sequelize("hng", "postgres", "admin", {
   host: "localhost",
   dialect: "postgres",
   pool: {

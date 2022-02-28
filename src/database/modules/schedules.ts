@@ -17,7 +17,7 @@ export default class Schedules extends Model {
 Schedules.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -55,7 +55,7 @@ Schedules.init(
       allowNull: false,
     },
     calendarId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: "calendars",

@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db_config";
-import Positions from "./positions";
+import Employees from "./employees";
 
 export default class Salons extends Model {
   public id!: number;
@@ -11,7 +11,7 @@ export default class Salons extends Model {
 Salons.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -31,7 +31,10 @@ Salons.init(
   }
 );
 
-Salons.hasMany(Positions, {
+Salons.hasMany(Employees, {
+  sourceKey: "id",
   foreignKey: "salonId",
+  as: "employees",
   foreignKeyConstraint: true,
 });
+Employees.belongsTo(Salons, { foreignKey: "salonId", as: "salons" });

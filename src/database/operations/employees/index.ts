@@ -1,5 +1,7 @@
+import { query } from "express";
 import Employee from "../../modules/employees";
 import Positions from "../../modules/positions";
+import Salons from "../../modules/salons";
 import { Employees } from "./types";
 
 const newEmployee = async (request: Employees) => {
@@ -83,7 +85,9 @@ const getEmployee = async (id: string) => {
 
 const allEmployees = async (query: any) => {
   try {
-    const employee = await Employee.findAll({
+    console.log("NALI!!", query);
+
+    const employee = await Employee.findAll(
       // include: [
       //   {
       //     association: "positions",
@@ -95,8 +99,44 @@ const allEmployees = async (query: any) => {
       //     ],
       //   },
       // ],
-      where: { ...query },
-    });
+      // where: { ...query },
+      Object.keys(query).length === 0
+        ? {}
+        : {
+            // where: {
+            //   "$Salons.salonId": query["salonId"],
+            //   "$Positions.positionId": query["positionId"],
+            // },
+            include: [
+              {
+                model: Salons,
+                as: "salons",
+                ...whereFnc(query, "salonId"),
+                required: true,
+                attributes: [],
+              },
+              {
+                model: Positions,
+                as: "positions",
+                ...whereFnc(query, "positionId"),
+                required: true,
+                attributes: [],
+              },
+            ],
+            attributes: {
+              // include: [
+              //   "id",
+              //   "firstName",
+              //   "middleName",
+              //   "lastName",
+              //   "img",
+              //   "description",
+              // ],
+              exclude: ["positionId", "salonId"],
+            },
+            // where: { ...query },
+          }
+    );
     // const employee = await Employee.findAll({ where: { ...query } });
     if (employee !== null && employee !== undefined) {
       return { result: employee, status: "success" };
@@ -109,6 +149,9 @@ const allEmployees = async (query: any) => {
     return { result: error.message, status: "error" };
   }
 };
+
+const whereFnc = (query: any, entityId: string) =>
+  entityId ? { where: { id: query[entityId] } } : {};
 
 export {
   newEmployee,

@@ -1,6 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db_config";
 import Calendars from "./calendars";
+import Positions from "./positions";
+import Salons from "./salons";
 
 export default class Employees extends Model {
   public id!: number;
@@ -14,7 +16,7 @@ export default class Employees extends Model {
 Employees.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -31,7 +33,7 @@ Employees.init(
       allowNull: false,
     },
     img: {
-      type: new DataTypes.STRING(128),
+      type: new DataTypes.STRING(),
       allowNull: false,
     },
     description: {
@@ -39,10 +41,18 @@ Employees.init(
       allowNull: false,
     },
     positionId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: "positions",
+        key: "id",
+      },
+    },
+    salonId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "salons",
         key: "id",
       },
     },
@@ -54,7 +64,11 @@ Employees.init(
   }
 );
 
-
+// Employees.belongsTo(Positions, {
+//   foreignKey: "positionId",
+//   targetKey: "positionId",
+// });
+// Employees.belongsTo(Salons, { foreignKey: "salonId", targetKey: "salonId" });
 Employees.hasOne(Calendars, {
   foreignKey: "employeeId",
   foreignKeyConstraint: true,

@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db_config";
+import Positions from "./positions";
 
 export default class Services extends Model {
   public id!: number;
@@ -11,7 +12,7 @@ export default class Services extends Model {
 Services.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
@@ -28,7 +29,7 @@ Services.init(
       allowNull: true,
     },
     positionId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: "positions",
